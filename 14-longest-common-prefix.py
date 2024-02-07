@@ -18,6 +18,7 @@
 # 0 <= strs[i].length <= 200
 # strs[i] consists of only lowercase English letters.
 
+# use zip 
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
             letters = ''
