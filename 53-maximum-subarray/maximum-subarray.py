@@ -22,8 +22,9 @@ class Solution:
         max_sum = float('-inf')
         curr_sum = 0
         for num in nums:
-            if curr_sum <= 0:
-                curr_sum = 0
-            curr_sum += num
-            max_sum = max(max_sum, curr_sum)
+            # if the num is larger than the sum of the curr_sum + num, than we want to start a new subarray count here, otherwise
+            # if the curr_sum + num is larger, we want to continue with our current subarray
+            curr_sum = max(num, curr_sum + num) 
+            max_sum = max(max_sum, curr_sum) 
         return max_sum
+        # [-2,1,-3,4,-1,2,1,-5,4]
