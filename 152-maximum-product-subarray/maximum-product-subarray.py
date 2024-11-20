@@ -44,10 +44,10 @@ class Solution:
             suffix *= nums[j]
 
             # get the max between the prefix and suffix 
-            pref_suff_max = max(prefix, suffix)
-            
+            # pref_suff_max = max(prefix, suffix)
+
             # get the max between the current result and the updated max calculated from pref_suff_max
-            result = max(result, pref_suff_max)
+            result = max(result, prefix, suffix)
         return result
 
         # # do this in case there is neg and 0, ex : [-2,0], want to return 0
