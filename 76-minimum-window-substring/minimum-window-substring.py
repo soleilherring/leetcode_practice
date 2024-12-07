@@ -33,21 +33,35 @@ class Solution:
             return ""
 
         for r in range(len(s)):
+            # want to check if our current letter is one of the letters in t_dict
             if s[r] in t_dict:
+                # if letter in t_dict, +=1 to current_dict 
                 current_dict[s[r]] += 1
+                # check if the curretn_dict[s[r]] == t_dict[s[r]] because than we know we have the correct 
+                # counts of the letter (in case there are duplicates of teh same letter)
                 if current_dict[s[r]] == t_dict[s[r]]:
+                    # if we have the correct count of our letter in both the current_dict and t_dict that means we 
+                    # can increment our current of having found the number of times of that uniquehat unique letter
                     current_num += 1
                 
+            # while we have the current_num == t_lenght (so while we have found all the unique characters in t in s)
             while current_num == t_length:
+                # we check if the min_string is greater than our current width of our window, if it is update
                 if min_string >  r - left + 1:
                     min_string = r - left + 1 
+                    # get the current letters that are the min string
                     letters = s[left:r+1]
-
+                # we will begin to remove left most letter to shrink the window
+                # first we check if the left most letter is in the t_dict
                 if s[left] in t_dict:
+
+                    # if the s[left] letter frequency is equal in both current_dict and t_dict 
+                    # that means that if we remove s[left] from the window the current_num will need to decrease and the window will be invalid
                     if current_dict[s[left]] == t_dict[s[left]]:
                         current_num -=1 
+                    # regardless, reduce s[left] -= 1
                     current_dict[s[left]] -=1
-                
+                # move the left pointer forward to narrow window
                 left +=1
 
         return letters
