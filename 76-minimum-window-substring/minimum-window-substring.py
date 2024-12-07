@@ -26,11 +26,8 @@ class Solution:
         current_dict = collections.Counter()
         min_string = float('inf')
         letters = ""
-        # print(current_dict)
         t_dict = collections.Counter(t)
-        t_length = sum(t_dict.values())
-
-        # print(t_dict)
+        t_length = len(t_dict)
 
         if len(t) > len(s):
             return ""
@@ -38,16 +35,19 @@ class Solution:
         for r in range(len(s)):
             if s[r] in t_dict:
                 current_dict[s[r]] += 1
-                current_num += 1
-            
-            while all(current_dict[char] >= t_dict[char] for char in t_dict):
+                if current_dict[s[r]] == t_dict[s[r]]:
+                    current_num += 1
+                
+            while current_num == t_length:
                 if min_string >  r - left + 1:
                     min_string = r - left + 1 
                     letters = s[left:r+1]
 
                 if s[left] in t_dict:
-                    current_dict[s[left]]  -= 1
-                    current_num -= 1
+                    if current_dict[s[left]] == t_dict[s[left]]:
+                        current_num -=1 
+                    current_dict[s[left]] -=1
+                
                 left +=1
 
         return letters
