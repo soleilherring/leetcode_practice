@@ -6,6 +6,38 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
+
+        seen = set()
+        current = head
+
+        if not head:
+            return False
+
+        while current:
+            if current in seen:
+                return True
+
+            seen.add(current)
+            current = current.next
+        return False 
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         '''
         PREP
         parameters = head of a linked list
@@ -30,17 +62,17 @@ class Solution:
         return False
         '''
 
-        unique = set()
+        # unique = set()
          
-        if not head: 
-            return False
+        # if not head: 
+        #     return False
         
-        curr = head # 1
-        while curr: #curr 2
-            if curr not in unique:
-                unique.add(curr) #{1, 2}
-            else:
-                return True
-            curr = curr.next #2, None
-        return False
+        # curr = head # 1
+        # while curr: #curr 2
+        #     if curr not in unique:
+        #         unique.add(curr) #{1, 2}
+        #     else:
+        #         return True
+        #     curr = curr.next #2, None
+        # return False
         
