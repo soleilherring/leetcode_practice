@@ -1,4 +1,11 @@
 class Solution:
+    # helper function
+    def code(self, word, decoded_dict):
+        coded = []
+        for letter in word:
+            coded.append(decoded_dict[letter])
+        return ("".join(coded))
+
     def uniqueMorseRepresentations(self, words: List[str]) -> int:
         # PREP
         # parameter: list of morse code characters (dots /dashes)
@@ -25,17 +32,11 @@ class Solution:
         for i in range(len(morse_code)):
             morse_to_alp[chr(97 + i)] = morse_code[i]
 
-        # helper function
-        def code(word, decoded_dict):
-            coded = []
-            for letter in word:
-                coded.append(morse_to_alp[letter])
-            return ("".join(coded))
-
+        
         # main function
         unique = set()
         for word in words:
-            decoded = code(word, morse_to_alp)
+            decoded = self.code(word, morse_to_alp)
             if decoded not in unique:
                 unique.add(decoded)
         return len(unique)
