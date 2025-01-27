@@ -37,6 +37,5 @@ class Solution:
         unique = set()
         for word in words:
             decoded = self.code(word, morse_to_alp)
-            if decoded not in unique:
-                unique.add(decoded)
+            unique.add(decoded)
         return len(unique)
