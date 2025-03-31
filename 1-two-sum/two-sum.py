@@ -1,40 +1,27 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        '''PREP
-        paramters: 
-        int nums list
-        int target 
-        return: 
-        indices of two numbers that add up to target
-        example
-        [2,7,11,15], 9 -> [0,1]
-        - cant have same indices
-        [3,3] -> 6 [0,1]
-        pseudo:
-        1. difference variable  = 0
-           dictionary key = element and value is index
-        2. make a for loop 
-            - for each index, number in enumerate nums
-                - calculate differnce
-                    difference = target - element
-                - if the difference is in the dictionary
-                    return index and dictionary[difference]
-                -add the element. andindex to the dictionary
-                    dictionary[element] = index
-        '''
+        # PREP
+        # 1. parameters:
+        # array of nums, 
+        # int target 
+        # 2. return the indices of the two numbers that added together make the target
+        # 3. example:
+        #     a. [2,4,5,1] target 9, 
+        #     b. return [1,2]
+        # 4. pseudocode
+        #     a. make a variable to calculate the difference between the target and the current element
+        #     b. make a dictionary to hold the numbers
+        #     c. for loop to move through each element in the list
+        #         a. if the target - element is in the dictionary, return the target index and the index of the other element
+        
         difference = 0
-        ele_indx = {}
-        # traditional for loop with range
-        # for i in range(len(nums)):
-        #     difference = target - nums[i]
-        #     if difference in ele_indx: 
-        #         return [ele_indx[difference], i]
-        #     ele_indx[nums[i]] = i 
+        num_index = {}
 
-        # enumerate
-        for index, element in enumerate(nums):
-            difference = target - element
-            if difference in ele_indx:
-                return [index, ele_indx[difference]]
-            ele_indx[element] = index
-                
+        for index, num in enumerate(nums):
+            difference = target - num
+            if difference in num_index:
+                return [num_index[difference], index]
+            num_index[num] = index
+
+
+ 
