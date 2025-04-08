@@ -1,53 +1,61 @@
 from collections import Counter
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        # use dictionary
-        # edge case
-        # empty or singular item in array
+        # PREP
+        # 1. parameters: int nums array
+        # 2. return boolean (true if duplicate, false otherwise)
+        # 3. example: [1,2,3,1] => true (1 repeated)
+        # 4. pseudocode:
+        # 1. create either dictionary or set
+        # 2. if number already exists in dictionary or set, return true, 
+        #     at end of loop return false
 
-        # dictionary for frequency
-        nums_frequency = {}
-
-        for num in nums:
-            if num in nums_frequency:
-                return True 
-            nums_frequency[num] =  1
-        return False 
-    
-        # Version 2
-
-        # return len(set(nums)) != len(nums)
-
-        # Version 3
-
-        # seen = {}
+        # contents = {}
         # for num in nums:
-        #     if num not in seen:
-        #         seen[num] =1
-        #     else:
-        #         seen[num]  +=1
-        
-        # for num in seen.values():
-        #     if num >1:
+        #     if num in contents:
         #         return True
-        # return False
-
-
-        # Version 4
-        # first define a set 
-        # set_of_letters = set()
-        # for letter in nums:
-        #     if letter in set_of_letters:
-        #         return True
-        #     set_of_letters.add(letter)
-        # return False
-
-        # Version 5
-
-        # seen = {}
-
-        # for num in nums:
-        #     if num in seen:
-        #         return True
-        #     seen[num] = seen.get(num, 0) + 1
+        #     contents[num] = contents.get(num, 0) + 1  
         # return False 
+
+        # set version:
+        unique = set()
+        for num in nums:
+            if num in unique:
+                return True
+            unique.add(num)
+        return False 
+        # '''
+        # PREP
+        # parameters:
+        # int nums array 
+        # return:
+        # true if value appears at least twice
+        # false otherwise
+        # example:
+        # [1,2,3,1]- > true (1 is duplicate)
+        # pseudocode:
+
+        # version 1:
+        # make a set of the nums list
+        # compare the set length vs. list length,
+        # if different, return true (because set length will only have distinct numbers so if it differs from length of 
+        # nums list, that means we have duplicates)
+
+        # version 2:
+        # dictionary
+        # if the number is already in the dictionary, return true
+        # otherwise, add the number to dictionary
+        # return false at end if never finding a duplicate
+
+        # version 3:
+        # As move through list
+        # if encounter number already in set, return true
+        # otherwise, return false at the end
+
+        # '''
+        # num_set = set()
+        # for num in nums:
+        #     if num in num_set:
+        #         return True
+        #     num_set.add(num)
+        # return False
