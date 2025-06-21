@@ -23,11 +23,8 @@ class Solution:
         '''
 
         split_sentence = sentence.split(" ")
-        k = len(searchWord)
 
         for index, word in enumerate(split_sentence):
-            # if len(word) < k:
-            #     continue
-            if word[:k] == searchWord:
+            if word.startswith(searchWord):
                 return index + 1
         return -1
