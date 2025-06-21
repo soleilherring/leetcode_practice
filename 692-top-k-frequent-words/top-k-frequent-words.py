@@ -27,8 +27,7 @@ class Solution:
         for words in range(len(frequency) -1, 0, -1) :
             if not len(frequency[words]):
                 continue 
-            frequency[words].sort()
-            for word in frequency[words]:
+            for word in sorted(frequency[words]):
                 result.append(word)
                 if len(result) == k :
                     return result
