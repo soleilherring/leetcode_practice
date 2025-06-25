@@ -16,7 +16,7 @@ class Solution:
         # dfs backtracking
         def dfs(index, result):
             #  base case
-            if index >= len(s):
+            if index == len(s):
                 return final.append(result)
             # let\ter 
             if s[index].isalpha():
