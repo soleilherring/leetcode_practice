@@ -1,40 +1,39 @@
 class Solution:
     def filterRestaurants(self, restaurants: List[List[int]], veganFriendly: int, maxPrice: int, maxDistance: int) -> List[int]:
-        """
-        parameters:
-        list of lists, 
-        restaurant[i] = [id, rating, veganFriendly, price, distance]
-            filter first by veganFriendly
-        filter by veganFriendly, price, distance
+    # #   parameters:
+    # list of lists
+    # integers
+    # - veganFriendly,
+    # -maxPrice
+    # -maxDistance
+    # return
+    # list of integers(id, ordered by the rating)
+    # example [1,4,1,40,10], [4,10,0,10,3], [3,8,1,30,4]-> [3,1]
+    # pseudocode:
+    # 1. filter by three categories:
+    #     a. veganfriendly (if true)
+    #     b. maxPrice (less than or equal to)
+    #     c. maxDistance( less than or equal to)
+    # 2. return an array of ids, sorted by rating
 
-        return:
-        list of restaurants sorted by rating from highest to lowest
-        if restaurant is the same, by id highest to lowest
-        """
-        
-        # for restaurant in restaurants:
-            # lambda function
-            # if veganFriendly = 1, filter out restaurants that are vegan friendly
-        # if veganFriendly == 1:
-        #     restaurants = list(filter(lambda restaurant: restaurant[2] == 1, restaurants))
-        #     # otherwise filter based on maxPrice, maxDistance
-        #     # filter to check that the maxPrice for each restaurant is lower than the maxPrice variable
-        # restaurants = list(filter(lambda restaurant: restaurant[3]<= maxPrice and restaurant[4] <=maxDistance, restaurants))
-        # # sorty by rating (descending)
-        # sorted_restaurants = sorted(restaurants, key = lambda r:(-r[1], -r[0]))
-       
-        # return [r[0] for r in sorted_restaurants]
-        
-        # make constants
-    
+    # CONTANTS = id, rating, veganFriendly price, distance and their indexes
+    # A. for loop 
+    #     a. check if the maxPrice/maxDistance is less than or equal to input
+    #         check if the veganFriendly is 0, if it isnt that means its true so filter by that
+    # B. after getting filtered list, sort by rating
+    # c. return id for the sorted by rating list
         ID, RATING, VEGAN, PRICE, DIST = 0, 1, 2, 3, 4
         filtered = []
-        for restaurant in restaurants:
-            if ((not veganFriendly or restaurant[VEGAN] ==1) 
-                and restaurant[PRICE] <= maxPrice 
-                and restaurant[DIST] <= maxDistance):
-                filtered.append(restaurant)
-        
-        sorted_restaurants = sorted(filtered, key=lambda r: (r[RATING], r[ID]), reverse=True)
+        for rest in restaurants:
+            if rest[PRICE] <= maxPrice and rest[DIST] <= maxDistance and (veganFriendly == 0 or rest[VEGAN]):
+                filtered.append(rest)
 
-        return [r[ID] for r in sorted_restaurants]
+        # sort, usually ascending, need to make descending 
+        sorted_rest = sorted(filtered, key= lambda rest : (rest[RATING], rest[ID]), reverse =True)
+        
+        # return result array based on id of sorted rating list
+        result = []
+        for rest in sorted_rest:
+            result.append(rest[ID])
+        
+        return result
