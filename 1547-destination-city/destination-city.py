@@ -1,25 +1,21 @@
 class Solution:
     def destCity(self, paths: List[List[str]]) -> str:
-        """
-        nested list with list of strings of destinations 
-        return the destination city
-        example [["a", "b"], ["c","d"], ["b", "c"]] -> d
-        pseudo:
-            1. make into dictionary
-            2. if the the destination doesnt appear as both a key and value, than it is the destination 
-            loop over
-            if the destination is not a key at some point it is the destination city
-        """
-        destinations = {}
-        
-        def build_dict(route, hash_map):
-            for i in range(1, len(route)):
-                destinations[path[i-1]] = path[i]
-            return destinations
-        
+    #   parameters: list of lists
+    # return: the destination 
+    # example: [['london','milan'], ['milan', 'vienna'], ['vienna','hamburg']]
+    # return hamburg
+    # pseudo:
+    # 1. make into a dictinoary
+    #2. check that each has a key with a value, if not value, return that node
+    # 3. for each key in dictionary 
+    #       check if it has a value. if not, return key 
+
+        dest_dict = {}
         for path in paths:
-            all_routes = build_dict(path, destinations)
+            dest_dict[path[0]] = path[1]
+
+        for path in dest_dict:
+            while path in dest_dict:
+                path = dest_dict[path]
+        return path
         
-        for path in all_routes.values():
-            if path not in all_routes.keys():
-                return path
