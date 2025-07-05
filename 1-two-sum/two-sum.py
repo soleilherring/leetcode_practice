@@ -12,7 +12,9 @@ class Solution:
         num_dict = {}
         for index, num in enumerate(nums):
             difference = target - num
-            if difference not in num_dict:
-                num_dict[num] = index  
-            else: return [index, num_dict[difference]]
+            if difference in num_dict:
+                return [index, num_dict[difference]]
+            num_dict[num] = index  
+        return []
+
             
