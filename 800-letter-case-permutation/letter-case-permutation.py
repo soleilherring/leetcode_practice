@@ -1,32 +1,43 @@
 class Solution:
     def letterCasePermutation(self, s: str) -> List[str]:
-        """
-        PREP
-        parameters: string 
-        return
-        list of strings
-        example:
-        [a1B2, a1B2, A1b2, A1B2]
-        pseudocode
-        1. get the 
-    
-        """
-        final = []
-        result = ""
-        # dfs backtracking
-        def dfs(index, result):
-            #  base case
-            if index == len(s):
-                return final.append(result)
-            # let\ter 
-            if s[index].isalpha():
-                # lowercase
-                dfs(index + 1, result + s[index].lower())
-                # uppercase 
-                dfs(index + 1, result + s[index].upper())
-            # number (just append it)
+        # dfs because each letter has two options to choose from, lowercase or uppercase
+        # if not letter, continue and add the number to the current string youre building
+
+        # string of characters/numbers
+        # return an array of strings, every possible string we could create
+        # pseudo
+        # 1. have a final result array that will be outside of the dfs 
+        # 2. have a dfs that has 
+            # step 1:
+            # initialize/declare an empty string that wil be later added to result array
+            # sub_res = ''
+            # a. base case where the  i is the length of s
+            #     return 
+            # b. recursive cases
+            #     i. check if alphabetical
+            #         -lowercase
+            #         -uppercase
+            #     ii. numeric 
+            # append the string to the result??
+        result = []
+       
+        def dfs(i, path):
+            # base case
+            if i == len(s):
+                result.append(path)
+                return 
+
+            # recursive case
+            # check if alpha
+            if s[i].isalpha():
+                # lower
+                dfs(i + 1, path + s[i].lower())
+                # upper
+                dfs(i + 1, path + s[i].upper())
+            # numeric
             else:
-                dfs(index + 1, result + s[index])
-        
-        dfs(0,"")
-        return final
+                dfs(i + 1, path + s[i])
+
+        dfs(0, '')
+        return result 
+      
