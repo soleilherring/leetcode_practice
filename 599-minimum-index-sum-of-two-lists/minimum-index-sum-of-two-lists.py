@@ -23,9 +23,8 @@ class Solution:
 
         for word, index_sum in index_dict.items():
             if index_sum < min_index:
-                min_index = index_sum
-        
-        for word in index_dict:
-            if index_dict[word] == min_index:
+                min_index = min(index_sum, min_index)
+                result = [word]
+            elif min_index == index_sum:
                 result.append(word)
-        return result 
+        return result
