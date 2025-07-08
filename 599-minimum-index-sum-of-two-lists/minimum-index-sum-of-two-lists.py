@@ -1,49 +1,31 @@
 class Solution:
     def findRestaurant(self, list1: List[str], list2: List[str]) -> List[str]:
-        """
-        parameters: 
-        list of string - list 1
-        list of string - list 2
-        return:
-        the common strings with the lowest index sum
-        example ['cat','dog','bird'], 
-                ['dog','lizard', 'cat']
-                1 + 0 => 1, 
-                ['dog']
-        use set to find common words
-        index_sum dict, to hold the word and the sum of index as value
-        two for loops
-            for loop for list 1 
-                check that this is a common word in the common_str set if so...
-                    add word to dict with value as its current index
-            for loop for list 2
-                check that this is a common word in the common_str set if so... 
-                    add word to dict with value+= index (because this will be already added to index_sum dict, we are just adding the 
-                    new index to it so we can get the sum of index)
-            make a new list
-            result list
-            minimum value = min(index_sum.val)
-            for loop
-                from word in the common strs..
-                    check if the index_sum[word] value == min val, if so add it to result list
-            return result list
-                
+        set1 = set(list1)
+        set2 = set(list2)
 
+        intersection =  (set1 & set2) 
+        if len(intersection) == 1:
+            return list(intersection)
 
-        
-        """
-        common_str = set(list1) & set(list2)
-        index_sum = {}
+        index_dict = {}
+
+        # filter by intersection words
         for index, word in enumerate(list1):
-            if word in common_str:
-                index_sum[word] = index
+            if word in intersection:
+                index_dict[word] = index
+        # only add index to words that are in the index dict (which we know are intersecting because we filtered for that)
         for index, word in enumerate(list2):
-            if word in common_str:
-                index_sum[word] += index
+            if word in index_dict:
+                index_dict[word] += index
 
+        min_index = float('inf')
         result = []
-        min_sum = min(index_sum.values())
-        for word in common_str:
-            if index_sum[word] == min_sum:
+
+        for word, index_sum in index_dict.items():
+            if index_sum < min_index:
+                min_index = index_sum
+        
+        for word in index_dict:
+            if index_dict[word] == min_index:
                 result.append(word)
         return result 
