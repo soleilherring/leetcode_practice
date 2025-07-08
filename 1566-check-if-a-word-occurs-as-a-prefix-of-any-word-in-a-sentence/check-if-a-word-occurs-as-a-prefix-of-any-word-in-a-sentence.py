@@ -12,10 +12,10 @@ class Solution:
         #         return the index + 1 //because 1 indexed
         #  3. return -1 //no prefix in string
 
-        window = len(searchWord)
-        split_sentence = sentence.split(" ")
+        # window = len(searchWord)
+        # alternative => word.startsWith()
 
-        for index, word in enumerate(split_sentence):
-            if word[:window] == searchWord:
+        for index, word in enumerate(sentence.split()):
+            if word.startswith(searchWord):
                 return index + 1
         return -1 
