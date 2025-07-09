@@ -1,28 +1,30 @@
 class Solution:
     def compress(self, chars: List[str]) -> int:
-        # so two pointers
-        # read and write. read is moving to the right to see if the value is same 
-        # we could have a variable calle 'start' which tells us where the group starts
-        # write will replace whats there with the count + 1
-
-        start = 0
+    #     parameters: 
+    #     list of characters
+    #     return is length of compressed string (inplace)
+    #     note : 
+    #     - if length is 1, just append the character 
+    #     - if length of character count >= 10, split into multiple characters
+    #     pseudocode
+        s = 0 
         write = 0
+        while s < len(chars):
+            # our i is moving so we initially start it at same spot as s, when we get to a new letter we will want it 
+            # to start at whereverr i is again
+            i = s
+            while i < len(chars) and chars[i] == chars[s]:
+                i+=1 
 
-        for r in range(len(chars)):
-            if len(chars) == r+ 1 or chars[r] != chars[r+1]:
-                chars[write] = chars[r]
-                count = r -start+1
-                write +=1
-                start = r+ 1 
-                if count > 1:
-                    for num in str(count):
-                        chars[write] = num
-                        write += 1 
-        return write
+            count = i - s 
+            chars[write] = chars[s]
+            write += 1
 
-
-
-        
+            if count > 1:
+                for num in str(count):
+                    chars[write] = num
+                    write += 1 
             
+            s = i 
 
-
+        return write
