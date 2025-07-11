@@ -1,28 +1,36 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # dictionary that counts the elements in the array
-        # array that holds the index = number count, and the number placed there is the number with that count
-        # go through the array backwards and get that number from the array up until it hits the kth number 
+        # parameters:
+        # nums int list
+        # k (window size)
+        # return array of k most frequent int
+        # 1. make a bucket array with sub arrays holding the places for length nums + 1 (becaue 0 will have no elements)
+        # 2. make a dictionary that can hold the element and it's count as the value
+        # 3. loop through the bucket and the index of the bucket will be the count for the num and the value will be an array at that spot
+        # 4. iterate backwords and if there is a number get that and append to result array until the arry is of k size
 
+        # make bucket array
+        freq = [[] for _ in range(len(nums) + 1)]
 
+        # make dictionary where key = nums, val = count of the num
         num_count = {}
         for num in nums:
-            num_count[num] = num_count.get(num, 0) + 1 
+            if num not in num_count:
+                num_count[num] = 0
+            num_count[num] += 1
 
-        freq = [[] for num in range(len(nums)+1)]
+        # update the freq array
+        # the index = count
+        # the [num,] will be appended to the array
+        for key, val in num_count.items():
+            freq[val].append(key)
+        print(freq)
 
-        # add the number into the array in the correct position where the number is in the index(count) spot
-        for num, frequency in num_count.items():
-            freq[frequency].append(num)
-
-        # iterate through the array backwards
-        # start stop step
-        # result array
-
+        # iterate backwards and add to a result array the k most frequent elements  
         result = []
-        for i in range(len(freq) -1, 0, -1):
-            for j in freq[i]:
-                result.append(j)
-                if len(result) == k:
+        for i in range(len(freq) - 1, -1, -1):
+            if freq[i]:
+                for num in freq[i]:
+                    result.append(num)
+                    if len(result) == k:
                         return result
-
