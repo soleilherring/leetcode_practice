@@ -15,9 +15,21 @@ class Solution:
         # min 
         shortest = min(strs, key = len)
 
-        for i in range(len(strs)):
+        # for i in range(len(strs)):
 
-            while not strs[i].startswith(shortest):
-                shortest = shortest[:-1]
-        return shortest
+        #     while not strs[i].startswith(shortest):
+        #         shortest = shortest[:-1]
+        # return shortest
+
+        # second way
+
+        for i in range(len(shortest)):
+            for word in strs:
+                if word[i] != shortest[i]:
+                    shortest = shortest[:i]
+                    return shortest
+        return shortest #add this so in case there are never mismatches and the entire prefix is in the word
+       
+
+
     
