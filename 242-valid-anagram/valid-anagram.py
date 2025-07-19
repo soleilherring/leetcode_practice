@@ -13,22 +13,41 @@ class Solution:
         # at the end check if the dictionary has any non 0 value, if so return false
 
         # or
-        if len(t) != len(s):
-            return False
+        # if len(t) != len(s):
+        #     return False
 
-        letters_in_s = Counter(s)
+        # letters_in_s = Counter(s)
 
-        for letter in t:
-            if letter in letters_in_s:
-                letters_in_s[letter] -= 1
+        # for letter in t:
+        #     if letter in letters_in_s:
+        #         letters_in_s[letter] -= 1
             
 
-        for count in letters_in_s.values():
-            if count != 0:
+        # for count in letters_in_s.values():
+        #     if count != 0:
+        #         return False
+        # return True 
+
+
+        letters = [0] * 26
+
+        if len(s) != len(t):
+            return False
+        
+        for letter in s:
+            letters[ord(letter) - ord('a')] += 1
+        
+        for letter in t:
+            if letters[ord(letter) - ord('a')] == 0:
                 return False
-        return True 
-
-
+            else:
+                letters[ord(letter) - ord('a')] -= 1
+        return True
+        
+        # for letter in letters:
+        #     if letter != 0:
+        #         return False
+        # return True 
 
 
 
