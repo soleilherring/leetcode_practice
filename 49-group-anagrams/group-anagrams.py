@@ -1,33 +1,30 @@
-from collections import defaultdict
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        # make an array with the 26 letters in. thedictionary 
-        # we will count the occurence of each letter and put it in the array
-        # [0, 0]
-        #  a. b...
-        # #  make these into a tuple then set them as the key to a dictoanry
-        #      if a word when made into this occurence array is in the dictionary, has this many letters 
-        #         it will be the value (append the word the result value )
-        # return the result 
+        # paramters:
+        # list of words
+        # return an array of anagrams grouped together
 
-        # create frequency array
+        # use ord? use dict and ord?
+        # 1. for every word 
+        #     for every letter, count the letter and it's index will be teh letter in tthe array and count will be the elemnt
+        #     make that the key to the anagrams dict
+        #     for every word check if it's list is already in the anagram key, if it is, append tha tword
+        #     return the anagrams.values()
 
-        anagrams = defaultdict(list)
-
-        
+        anagrams = collections.defaultdict(list)
+   
+        # key =( [letters count]) =word list
         for word in strs:
-            # calcuated for that word the number of times its letters occur
-            freq = [0] * 26
+            word_count = [0] * 26
             for letter in word:
-                freq[ord(letter) - ord('a')] += 1
+                word_count[ord(letter) - ord('a')] += 1
 
-            # tuples are immutable so convert list into tuple and make it a key in the dict
-            key = tuple(freq)
-            # if key in anagrams:
-            #     anagrams[key].append(word)
-            # else:
-            #     anagrams[key] = [word]
-            anagrams[key].append(word)
+            tuple_word_count = tuple(word_count)
+            if tuple_word_count not in anagrams:
+                anagrams[tuple_word_count].append(word)
+            else:
+                anagrams[tuple_word_count].append(word)
         return list(anagrams.values())
 
-        
+            
+
